@@ -49,7 +49,8 @@
                 :source-paths ["src"]
                 :compiler {:output-to "resources/public/js/compiled/twinejson.js"
                            :main twinejson.core
-                           :optimizations :advanced
+                           :target :nodejs
+                           :optimizations :none
                            :pretty-print false}}]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
