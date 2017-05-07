@@ -2,19 +2,29 @@
 
 CLI tool for exporting Twine 2 stories into json
 
+
 ### Basic Usage
 
 Publish our archive your story to `html` then:
 
-> node <path_to>/twinejson-min.js <path_to>/<your_published_story>.html <path_to>/<output>.json
+```
+$ npm install twinejson-cli
+twinejson-cli@0.0.2 node_modules/twinejson-cli
+└── ws@2.3.1 (ultron@1.1.0, safe-buffer@5.0.1)
 
-### Building 
+$ node node_modules/twinejson-cli/twinejson-min.js ~/path/input.html ~/path/output.json
+Successfully written to '~/path/output.json'
+```
 
-`lein figwheel dev`
+### Building from Source
+
+
+`lein cljsbuild once min` will build a minified file at `twinejson-min.js`
 
 or 
 
-`lein figwheel min`
+`lein figwheel dev` will open a REPL with hot reloading using `figwheel`
+
 
 ### Output Sample
 

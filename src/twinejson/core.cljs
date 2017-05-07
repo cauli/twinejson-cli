@@ -4,8 +4,7 @@
             [cljs.nodejs :as nodejs]
             [tubax.core :refer [xml->clj]]
             [tubax.helpers :as th]
-            [cljs-node-io.core :as io :refer [slurp spit]]
-            [cljs-node-io.fs :as fs]))
+            [cljs-node-io.core :as io :refer [slurp spit]]))
 
 (nodejs/enable-util-print!)
 
@@ -18,10 +17,6 @@
 
 (defn parse-xml [xml-string]
   (xml->clj xml-string {:strict false :lowercase true}))
-
-; (defn get-tw-storydata [parsed-xml]
-;   (th/find-all parsed-xml {:path [:tw-storydata]}))
-
 
 (defn remove-separators 
   "Removes the -> separator from links,
@@ -65,8 +60,6 @@
 
     passages-with-links))
 
-
-
 (defn do-conversion [slurped output-path]
   (let [json (to-json (add-links (parse-xml slurped)))]
     (go
@@ -86,17 +79,12 @@
           (println err))))))
 
 (defn on-js-reload []
-  ;(start-conversion "example.html")
   (start-conversion "example-published.html"))
 
 (defn main [& args]
-  (println "args: " args)
-
   (if (= (count args) 1)
     (start-conversion (first args))
     (let [one (first args) two (second args)]
-      (println "one: " one)
-      (println "two: " two)
       (start-conversion one two))))
 
 (set! *main-cli-fn* main)
