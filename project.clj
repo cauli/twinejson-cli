@@ -47,10 +47,10 @@
                ;; lein cljsbuild once min
                {:id "min"
                 :source-paths ["src"]
-                :compiler {:output-to "resources/public/js/compiled/twinejson.js"
+                :compiler {:output-to "twinejson-min.js"
                            :main twinejson.core
                            :target :nodejs
-                           :optimizations :none
+                           :optimizations :advanced
                            :pretty-print false}}]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"

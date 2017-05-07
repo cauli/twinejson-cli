@@ -1,0 +1,28 @@
+{
+  "name": "twinejson-cli",
+  "version": "0.0.2",
+  "description": "Exports Twine2 stories to json",
+  "main": "twinejson-min.js",
+  "dependencies": {
+    "ws": "^2.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cauli/twinejson-cli.git"
+  },
+  "keywords": [
+    "Twine",
+    "Clojurescript",
+    "Parser"
+  ],
+  "author": "Cauli Tomaz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cauli/twinejson-cli/issues"
+  },
+  "homepage": "https://github.com/cauli/twinejson-cli#readme"
+}

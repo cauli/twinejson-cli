@@ -6,8 +6,15 @@ CLI tool for exporting Twine 2 stories into json
 
 Publish our archive your story to `html` then:
 
-> node <path_to>/twinejson.js <path_to>/<input_html>.html <path_to>/<output_json>.json
-> node <path_to>/twinejson.js ~/Desktop/my_story.html ~/Desktop/my_story.json
+> node <path_to>/twinejson-min.js <path_to>/<your_published_story>.html <path_to>/<output>.json
+
+### Building 
+
+`lein figwheel dev`
+
+or 
+
+`lein figwheel min`
 
 ### Output Sample
 
