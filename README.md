@@ -5,7 +5,7 @@ CLI tool for exporting Twine 2 stories into json
 
 ### Basic Usage
 
-Publish our archive your story to `html` then:
+ `Publish` or `Archive` your `Twine2` story to `html` then:
 
 ```
 $ npm install twinejson-cli

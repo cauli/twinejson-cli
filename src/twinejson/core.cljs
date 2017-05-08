@@ -1,22 +1,13 @@
 (ns ^:figwheel-always twinejson.core
   (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require [cljs.core.async :as async :refer [<! >!]]
+  (:require [twinejson.converters :as cnv]
+            [twinejson.regex-matchers :as rgx]
+            [cljs.core.async :as async :refer [<! >!]]
             [cljs.nodejs :as nodejs]
-            [tubax.core :refer [xml->clj]]
             [tubax.helpers :as th]
             [cljs-node-io.core :as io :refer [slurp spit]]))
 
 (nodejs/enable-util-print!)
-
-(defn clj->json
-  [ds]
-  (.stringify js/JSON (clj->js ds)))
-
-(defn to-json [input]
-  (clj->json input))
-
-(defn parse-xml [xml-string]
-  (xml->clj xml-string {:strict false :lowercase true}))
 
 (defn remove-separators 
   "Removes the -> separator from links,
@@ -28,8 +19,8 @@
       (fn
         [link]
 
-        (let [links-without-right-separator (map #(last %)  (re-seq #"\[\[(([\w\s\-\>]+)(\-\>)){0,}(.+?)\]\]" (str link)))
-              left-separator-matcher (map #(re-seq #"([^\<\-\n]+)((\<\-)(.+)){0,}" %) links-without-right-separator)
+        (let [links-without-right-separator (map #(last %) (re-seq (rgx/right-arrow-title) (str link)) )
+              left-separator-matcher (map #(re-seq (rgx/left-arrow-title) %) links-without-right-separator)
               links-without-left-separator (map #(second %) (first left-separator-matcher))]
               links-without-left-separator))
       raw-links))
@@ -57,11 +48,10 @@
                                   passage
                                   :links (find-links (:content passage))))
                               passages)]
-
     passages-with-links))
 
 (defn do-conversion [slurped output-path]
-  (let [json (to-json (add-links (parse-xml slurped)))]
+  (let [json (cnv/to-json (add-links (cnv/parse-xml slurped)))]
     (go
       (let [[err] (<! (io/aspit output-path json))]
         (if-not err

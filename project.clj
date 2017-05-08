@@ -42,6 +42,17 @@
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
                            :preloads [devtools.preload]}}
+
+               {:id "test"
+                :source-paths ["src" "test"]
+                :compiler {:output-to "resources/public/js/test/test.js"
+                           :output-dir "resources/public/js/test/out"
+                           :optimizations :none
+                           :main twinejson.test-runner
+                           :asset-path "js/test/out"
+                           :source-map true
+                           ;; :source-map-timestamp true
+                           :cache-analysis true }}
                ;; This next build is an compressed minified build for
                ;; production. You can build this with:
                ;; lein cljsbuild once min
@@ -54,7 +65,7 @@
                            :pretty-print false}}]}
 
   :figwheel {;; :http-server-root "public" ;; default and assumes "resources"
-             ;; :server-port 3449 ;; default
+             :server-port 4449 ;; 3449 is the default
              ;; :server-ip "127.0.0.1"
 
              ;;:css-dirs ["resources/public/css"] ;; watch and update CSS
@@ -92,7 +103,7 @@
              ;; :server-logfile false
              }
 
-
+  :aliases {"test" ["cljsbuild" "test"]}
   ;; setting up nREPL for Figwheel and ClojureScript dev
   ;; Please see:
   ;; https://github.com/bhauman/lein-figwheel/wiki/Using-the-Figwheel-REPL-within-NRepl
